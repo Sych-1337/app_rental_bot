@@ -30,9 +30,15 @@ nav a:hover {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     padding: 2em 2.5em;
 }
-footer {
+footer.footer-centered {
     text-align: center;
     color: #888;
-    margin: 2em 0 1em 0;
     font-size: 0.95em;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #f4f6f8;
+    padding: 1em 0 0.5em 0;
+    z-index: 10;
 }

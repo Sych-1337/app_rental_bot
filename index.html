@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>App Dashboard</title>
+  <title>Fellows Team Dashboard</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -84,15 +84,15 @@
   </nav>
 
   <div class="container">
-    <h1 style="display:flex;align-items:center;gap:0.5em;"><span>📱</span> App Dashboard</h1>
-    <p>Добро пожаловать в сервис аренды приложений!<br>Здесь вы можете узнать подробности о возможностях платформы, условиях аренды и получить поддержку.</p>
+    <h1 style="display:flex;align-items:center;gap:0.5em;"><span>📱</span> Fellows Team Dashboard</h1>
+    <p>Тут вы можете узнать подробности о возможностях платформы, условиях аренды и получить поддержку.</p>
   </div>
 
   <div class="app-list" id="appList">
     <!-- App cards here -->
   </div>
 
-  <footer>&copy; 2025 App Sych System</footer>
+  <footer class="footer-centered">&copy; 2025 App Sych System</footer>
 
   <script>
   // Автоматически получаем все .json из папки apps (список файлов задается вручную, т.к. GitHub Pages не поддерживает чтение содержимого папки)
@@ -119,7 +119,7 @@
             <div class="app-info">
               <h2>${app.name}</h2>
               <a href="${app.package_url}" target="_blank">🌐 Google Play</a>
-              <a href="${app.rent_url}" target="_blank">🤝 Арендовать</a>
+              <a href="https://t.me/kotlincaptain" target="_blank">🤝 Арендовать</a>
             </div>
           `;
 
