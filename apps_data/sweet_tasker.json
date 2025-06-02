@@ -1,0 +1,14 @@
+{
+  "name": "Sweet Tasker",
+  "package_url": "https://play.google.com/store/apps/details?id=fortune.tasker.sweet.fate",
+  "config_url": "./apps/sweet_tasker.json",
+  "icon_url": "./apps/icons/sweet_tasker.png",
+  "rent_url": "https://t.me/kotlincaptain",
+  "description": "Приложение для управления задачами",
+  "version": "1.0.0",
+  "features": [
+    "Управление задачами",
+    "Напоминания",
+    "Синхронизация"
+  ]
+}

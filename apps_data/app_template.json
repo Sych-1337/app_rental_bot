@@ -1,0 +1,29 @@
+{
+    "id": "sweet_casino",
+    "name": "Sweet Casino",
+    "description": "Игровое приложение с различными слотами",
+    "version": "1.0.0",
+    "image": "https://sych-1337.github.io/app_dashboard/sweet_casino/preview.png",
+    "link": "https://sych-1337.github.io/app_dashboard/sweet_casino/",
+    "mini_app": "https://sych-1337.github.io/app_dashboard/sweet_casino/",
+    "config_url": "https://sych-1337.github.io/app_dashboard/sweet_casino/kb.json",
+    "features": [
+        "Слоты",
+        "Рулетка",
+        "Бонусы",
+        "Мини-игры"
+    ],
+    "access": {
+        "roles": ["user1", "user2"],
+        "permissions": {
+            "can_test": true,
+            "can_add_accounts": true,
+            "can_view_accounts": true
+        }
+    },
+    "stats": {
+        "active_users": 0,
+        "total_accounts": 0,
+        "last_update": "2025-06-02T12:28:00+03:00"
+    }
+}
