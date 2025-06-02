@@ -103,19 +103,30 @@ async def apps(message: types.Message):
     if message.from_user.id not in active_users:
         await message.reply("Сначала авторизуйтесь через /login.")
         return
-    app_list = load_apps()
-    if not app_list:
+    # Путь к папке с json-файлами приложений
+    APPS_DATA_DIR = os.path.join(os.path.dirname(__file__), 'apps_data')
+    apps = []
+    for fname in os.listdir(APPS_DATA_DIR):
+        if fname.endswith('.json'):
+            try:
+                with open(os.path.join(APPS_DATA_DIR, fname), encoding='utf-8') as f:
+                    app = json.load(f)
+                    apps.append(app)
+            except Exception as e:
+                logger.error(f"Ошибка чтения {fname}: {e}")
+    if not apps:
         await message.reply("Нет доступных приложений.")
         return
-    for app in app_list:
-        kb = types.InlineKeyboardMarkup(row_width=2)
-        kb.add(
-            types.InlineKeyboardButton("Арендовать 🤝", url=app.get('rent_url', 'https://t.me/kotlincaptain')),
-            types.InlineKeyboardButton("Саппорт 🛠", url=get_support_url(app))
-        )
-        msg = f"<b>{app.get('name', 'Без названия')}</b>\n"
-        msg += f"<a href='{app.get('package_url', '#')}' target='_blank'>Ссылка на приложение</a>"
-        await message.reply(msg, reply_markup=kb, parse_mode="HTML")
+    # Пока выводим только первое приложение
+    app = apps[0]
+    features = '\n'.join(f'- {f}' for f in app.get('features', []))
+    msg = f"<b>{app.get('name', 'Без названия')}</b>\n"
+    msg += f"<a href='{app.get('package_url', '#')}' target='_blank'>Ссылка на приложение</a>\n"
+    msg += f"Версия: {app.get('version', '-') }\n"
+    msg += f"Описание: {app.get('description', '-') }\n"
+    if features:
+        msg += f"\n<b>Функции:</b>\n{features}"
+    await message.reply(msg, parse_mode="HTML")
 
 @dp.callback_query_handler(lambda c: c.data == "back")
 async def go_back(call: types.CallbackQuery):
