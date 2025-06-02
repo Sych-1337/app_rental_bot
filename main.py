@@ -68,6 +68,24 @@ async def show_app(call: types.CallbackQuery):
     await call.message.answer_photo(photo=app["image"], caption=f"<b>Приложение {app['emoji']} <a href='{app['link']}'>{app['name']}</a>:</b>",
                                     parse_mode="HTML", reply_markup=keyboard)
 
+@dp.message_handler(commands=["apps"])
+async def apps(message: types.Message):
+    user = active_users.get(message.from_user.id)
+    if not user:
+        await message.reply("Сначала авторизуйтесь через /login.")
+        return
+
+    apps = DATA["apps"].get(user, [])
+    if not apps:
+        await message.reply("Нет доступных приложений.")
+        return
+
+    for app in apps:
+        kb = types.InlineKeyboardMarkup()
+        kb.add(types.InlineKeyboardButton("Mini App 🌐", url=app["mini_app"]))
+        kb.add(types.InlineKeyboardButton("Конфиг 📄", url=app["url"]))
+        await message.reply(f"📱 <b>{app['name']}</b>", reply_markup=kb, parse_mode="HTML")
+
 @dp.callback_query_handler(lambda c: c.data == "back")
 async def go_back(call: types.CallbackQuery):
     telegram_id = str(call.from_user.id)
