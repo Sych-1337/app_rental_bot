@@ -47,7 +47,12 @@
 <script>
 // Проверка запуска из Telegram Mini App
 function showNotTelegram() {
-    document.body.innerHTML = '<div style="max-width:420px;margin:8em auto 0 auto;padding:2em;background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.08);text-align:center;font-size:1.15em;color:#c62828;">\u0414\u043e\u0441\u0442\u0443\u043f \u0442\u043e\u043b\u044c\u043a\u043e \u0438\u0437 Telegram Mini App!<br><br>\u041e\u0442\u043a\u0440\u043e\u0439\u0442\u0435 \u0441\u0441\u044b\u043b\u043a\u0443 \u0447\u0435\u0440\u0435\u0437 Telegram, \u043d\u0430\u0436\u0430\u0432 \u043a\u043d\u043e\u043f\u043a\u0443 \u0432 \u0447\u0430\u0442\u0435 \u0441 \u0431\u043e\u0442\u043e\u043c.';
+    const msg = document.createElement('div');
+    msg.style = 'max-width:420px;margin:8em auto 0 auto;padding:2em;background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.08);text-align:center;font-size:1.15em;color:#c62828;';
+    msg.innerHTML = 'Доступ только из Telegram Mini App!<br><br>Откройте ссылку через Telegram, нажав кнопку в чате с ботом.';
+    document.body.prepend(msg);
+    let loginBlock = document.querySelector('.login-container');
+    if (loginBlock) loginBlock.style.display = 'none';
 }
 if (!(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData)) {
     showNotTelegram();

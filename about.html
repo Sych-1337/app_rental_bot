@@ -6,10 +6,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<script>
+if (localStorage.getItem('ftd_access') !== 'ok') {
+    window.location.href = 'login.html';
+}
+function logout() {
+    localStorage.removeItem('ftd_access');
+    window.location.href = 'login.html';
+}
+</script>
     <nav>
         <a href="index.html">Главная</a>
         <a href="about.html">О проекте</a>
         <a href="contacts.html">Контакты</a>
+        <a href="#" onclick="logout()" style="float:right;color:#c62828;font-weight:bold;">Выйти</a>
     </nav>
     <div class="container">
         <h1>О проекте</h1>
