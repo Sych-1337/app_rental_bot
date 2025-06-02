@@ -10,7 +10,6 @@ if not BOT_TOKEN or BOT_TOKEN.startswith('YOUR_') or BOT_TOKEN.strip() == '' or 
     logger.error(f"BOT_TOKEN не задан или некорректен: '{BOT_TOKEN}'")
     print(f"FATAL: BOT_TOKEN не задан или некорректен: '{BOT_TOKEN}'", file=sys.stderr)
     sys.exit(1)
-logger.info(f"BOT_TOKEN (начало): {BOT_TOKEN[:10]}... (длина: {len(BOT_TOKEN)})")
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
@@ -70,7 +69,7 @@ async def start(message: types.Message):
 
 @dp.message_handler(commands=["login"])
 @log_errors
-async def login(message: types.Message):
+async def login(message: types.Message, state=None):
     logger.info(f"User {message.from_user.id} attempting to login")
     parts = message.text.strip().split()
     if len(parts) != 2:

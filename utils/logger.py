@@ -20,7 +20,10 @@ logging.basicConfig(
 logger = logging.getLogger('app_rental_bot')
 
 # Декоратор для логирования ошибок
+import functools
+
 def log_errors(func):
+    @functools.wraps(func)
     async def wrapper(*args, **kwargs):
         try:
             return await func(*args, **kwargs)
