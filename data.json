@@ -8,16 +8,16 @@
       {
         "name": "Sweet Casino",
         "app_name": "sweet_casino",
-        "url": "https://your-username.github.io/app_dashboard/sweet_casino/kb.json",
-        "mini_app": "https://your-username.github.io/app_dashboard/sweet_casino/"
+        "url": "https://sych-1337.github.io/app_dashboard/sweet_casino/kb.json",
+        "mini_app": "https://sych-1337.github.io/app_dashboard/sweet_casino/"
       }
     ],
     "user2": [
       {
         "name": "Crypto Clicker",
         "app_name": "crypto_clicker",
-        "url": "https://your-username.github.io/app_dashboard/crypto_clicker/kb.json",
-        "mini_app": "https://your-username.github.io/app_dashboard/crypto_clicker/"
+        "url": "https://sych-1337.github.io/app_dashboard/crypto_clicker/kb.json",
+        "mini_app": "https://sych-1337.github.io/app_dashboard/crypto_clicker/"
       }
     ]
   }
