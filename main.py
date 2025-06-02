@@ -105,6 +105,9 @@ async def apps(message: types.Message):
         return
     # Путь к папке с json-файлами приложений
     APPS_DATA_DIR = os.path.join(os.path.dirname(__file__), 'apps_data')
+    if not os.path.isdir(APPS_DATA_DIR):
+        await message.reply("Папка с приложениями не найдена.")
+        return
     apps = []
     for fname in os.listdir(APPS_DATA_DIR):
         if fname.endswith('.json'):
@@ -117,16 +120,18 @@ async def apps(message: types.Message):
     if not apps:
         await message.reply("Нет доступных приложений.")
         return
-    # Пока выводим только первое приложение
-    app = apps[0]
-    features = '\n'.join(f'- {f}' for f in app.get('features', []))
-    msg = f"<b>{app.get('name', 'Без названия')}</b>\n"
-    msg += f"<a href='{app.get('package_url', '#')}' target='_blank'>Ссылка на приложение</a>\n"
-    msg += f"Версия: {app.get('version', '-') }\n"
-    msg += f"Описание: {app.get('description', '-') }\n"
-    if features:
-        msg += f"\n<b>Функции:</b>\n{features}"
-    await message.reply(msg, parse_mode="HTML")
+    # Формируем общий текст для всех приложений
+    msg = "<b>Доступные приложения:</b>\n\n"
+    for app in apps:
+        features = '\n'.join(f'- {f}' for f in app.get('features', []))
+        msg += f"<b>{app.get('name', 'Без названия')}</b>\n"
+        msg += f"<a href='{app.get('package_url', '#')}' target='_blank'>Ссылка на приложение</a>\n"
+        msg += f"Версия: {app.get('version', '-') }\n"
+        msg += f"Описание: {app.get('description', '-') }\n"
+        if features:
+            msg += f"<b>Функции:</b>\n{features}\n"
+        msg += "\n"
+    await message.reply(msg.strip(), parse_mode="HTML")
 
 @dp.callback_query_handler(lambda c: c.data == "back")
 async def go_back(call: types.CallbackQuery):
