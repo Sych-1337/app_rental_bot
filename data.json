@@ -1,0 +1,19 @@
+{
+  "tokens": ["alpha123", "beta456", "gamma789"],
+  "apps": [
+    {
+      "id": 1,
+      "name": "Sweet Fate Tasker",
+      "emoji": "🍭",
+      "link": "https://play.google.com/store/apps/details?id=fortune.tasker.sweet.fate",
+      "image": "https://example.com/plnki.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Word Orbs",
+      "emoji": "🔱",
+      "link": "https://play.google.com/store/apps/details?id=educate.word.orbs.play",
+      "image": "https://example.com/crusher.jpg"
+    }
+  ]
+}
