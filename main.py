@@ -3,30 +3,57 @@ from aiogram import Bot, Dispatcher, executor, types
 from bot.config import BOT_TOKEN
 import os
 from utils.logger import logger, log_errors
+import sys
+
+# Проверка BOT_TOKEN
+if not BOT_TOKEN or BOT_TOKEN.startswith('YOUR_') or BOT_TOKEN.strip() == '' or 'example' in BOT_TOKEN:
+    logger.error(f"BOT_TOKEN не задан или некорректен: '{BOT_TOKEN}'")
+    print(f"FATAL: BOT_TOKEN не задан или некорректен: '{BOT_TOKEN}'", file=sys.stderr)
+    sys.exit(1)
+logger.info(f"BOT_TOKEN (начало): {BOT_TOKEN[:10]}... (длина: {len(BOT_TOKEN)})")
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
 
-# Загружаем токены из site/tokens.json
+# Проверка наличия файлов токенов и папки с приложениями
 TOKENS_PATH = os.path.join(os.path.dirname(__file__), 'site', 'tokens.json')
+APPS_DIR = os.path.join(os.path.dirname(__file__), 'site', 'apps')
+
+if not os.path.isfile(TOKENS_PATH):
+    logger.error(f"Файл токенов не найден: {TOKENS_PATH}")
+    print(f"FATAL: Файл токенов не найден: {TOKENS_PATH}", file=sys.stderr)
+    sys.exit(2)
+if not os.path.isdir(APPS_DIR):
+    logger.error(f"Папка с приложениями не найдена: {APPS_DIR}")
+    print(f"FATAL: Папка с приложениями не найдена: {APPS_DIR}", file=sys.stderr)
+    sys.exit(3)
+
+# Загружаем токены из site/tokens.json
+
 def load_tokens():
     with open(TOKENS_PATH, encoding='utf-8') as f:
         data = json.load(f)
+    if not isinstance(data.get('tokens', []), list):
+        logger.error(f"tokens.json: поле 'tokens' не является списком!")
+        sys.exit(4)
     return set(data.get('tokens', []))
 
 tokens_set = load_tokens()
 active_users = set()
 
 # Загружаем список приложений из site/apps/*.json
-APPS_DIR = os.path.join(os.path.dirname(__file__), 'site', 'apps')
+
 def load_apps():
     apps = []
     for fname in os.listdir(APPS_DIR):
         if fname.endswith('.json'):
-            with open(os.path.join(APPS_DIR, fname), encoding='utf-8') as f:
-                app = json.load(f)
-                app['id'] = fname[:-5]
-                apps.append(app)
+            try:
+                with open(os.path.join(APPS_DIR, fname), encoding='utf-8') as f:
+                    app = json.load(f)
+                    app['id'] = fname[:-5]
+                    apps.append(app)
+            except Exception as e:
+                logger.error(f"Ошибка чтения {fname}: {e}")
     return apps
 
 def get_support_url(app):
