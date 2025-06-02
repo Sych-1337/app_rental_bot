@@ -1,0 +1,11 @@
+{
+  "name": "app-rental-bot",
+  "version": "1.0.0",
+  "description": "App Rental Bot website",
+  "scripts": {
+    "deploy": "gh-pages -d site"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  }
+}

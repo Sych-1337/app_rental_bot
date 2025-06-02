@@ -1,0 +1,24 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]  # Trigger on pushes to main branch
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: write  # For pushing to the gh-pages branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: site  # The folder to deploy (your built site)
+          branch: gh-pages  # The branch to deploy to
+          clean: true  # Automatically remove deleted files from the deploy branch
