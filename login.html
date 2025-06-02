@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход | Fellows Team Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .login-container {
+            max-width: 350px;
+            margin: 8em auto 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+            padding: 2em 2em 1.5em 2em;
+            text-align: center;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 0.7em;
+            margin: 1em 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 0.7em;
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .login-container button:hover {
+            background: #1565c0;
+        }
+        .login-error {
+            color: #c62828;
+            margin-top: 0.5em;
+            font-size: 0.98em;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Вход</h2>
+        <form id="loginForm">
+            <input type="password" id="tokenInput" placeholder="Введите токен" autocomplete="off" required />
+            <button type="submit">Войти</button>
+            <div id="loginError" class="login-error" style="display:none;"></div>
+        </form>
+    </div>
+    <script>
+        let validTokens = [];
+        fetch('tokens.json')
+            .then(res => res.json())
+            .then(data => {
+                validTokens = data.tokens || [];
+            });
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            const token = document.getElementById('tokenInput').value.trim();
+            if (validTokens.includes(token)) {
+                localStorage.setItem('ftd_access', 'ok');
+                window.location.href = 'index.html';
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+                document.getElementById('loginError').innerText = 'Неверный токен!';
+            }
+        };
+
+    </script>
+</body>
+</html>
