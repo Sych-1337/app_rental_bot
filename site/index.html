@@ -77,24 +77,36 @@
 </head>
 <body>
 
-  <h1>📱 App Dashboard</h1>
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="about.html">О проекте</a>
+    <a href="contacts.html">Контакты</a>
+  </nav>
+
+  <div class="container">
+    <h1 style="display:flex;align-items:center;gap:0.5em;"><span>📱</span> App Dashboard</h1>
+    <p>Добро пожаловать в сервис аренды приложений!<br>Здесь вы можете узнать подробности о возможностях платформы, условиях аренды и получить поддержку.</p>
+  </div>
 
   <div class="app-list" id="appList">
     <!-- App cards here -->
   </div>
 
-  <div class="footer">© 2025 App Sych System</div>
+  <footer>&copy; 2025 App Sych System</footer>
 
   <script>
+  // Автоматически получаем все .json из папки apps (список файлов задается вручную, т.к. GitHub Pages не поддерживает чтение содержимого папки)
   const jsonFiles = [
-      "apps/sweet_tasker.json",
-      "apps/word_orbs.json",
-      "apps/sweet_casino.json",
-      "apps/crypto_clicker.json"
-    ];
+    "apps/sweet_tasker.json",
+    "apps/app_template.json"
+    // Добавьте сюда новые json-файлы при появлении
+  ];
 
-    const container = document.getElementById("appList");
+  const container = document.getElementById("appList");
 
+  if (jsonFiles.length === 0) {
+    container.innerHTML = '<div style="text-align:center;color:#888;">Нет доступных приложений</div>';
+  } else {
     jsonFiles.forEach(file => {
       fetch(file)
         .then(res => res.json())
@@ -102,15 +114,14 @@
           const card = document.createElement("div");
           card.className = "app-card";
 
-         card.innerHTML = `
-          <img src="${app.icon_url}" alt="icon" onerror="this.src='https://via.placeholder.com/80'"/>
+          card.innerHTML = `
+            <img src="${app.icon_url}" alt="icon" onerror="this.src='https://via.placeholder.com/80'"/>
             <div class="app-info">
-            <h2>${app.name}</h2>
-            <a href="${app.package_url}" target="_blank">🌐 Google Play</a>
-            <a href="${app.rent_url}" target="_blank">🤝 Арендовать</a>
-          </div>
-        `;
-
+              <h2>${app.name}</h2>
+              <a href="${app.package_url}" target="_blank">🌐 Google Play</a>
+              <a href="${app.rent_url}" target="_blank">🤝 Арендовать</a>
+            </div>
+          `;
 
           container.appendChild(card);
         })
@@ -118,6 +129,7 @@
           console.error("Ошибка загрузки:", file, err);
         });
     });
+  }
   </script>
 
 </body>
