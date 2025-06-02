@@ -1,7 +1,12 @@
 {
-    "name": "Sweet Tasker",
-    "icon_url": "https://play-lh.googleusercontent.com/6v5wL8cK2p5F1c6wKkqk6TnN3Qw2zZQw9vQzZQw9vQzZQw9vQzZQw9vQzZQw9vQ=w240-h480-rw",
-    "package_url": "https://play.google.com/store/apps/details?id=com.sweet.tasker",
-    "rent_url": "#",
-    "features": ["Планирование задач", "Уведомления", "Синхронизация"]
+    "name": "Monster Master: Match 3 & Merge Animals",
+    "icon_url": "https://play-lh.googleusercontent.com/6wqQ9j8W2k7zJ4W2y4TQ9n8K8yqH9d5F8m7vQ9y8K9y8K9y8K9y8K9y8K=w240-h480-rw",
+    "package_url": "https://play.google.com/store/apps/details?id=com.aimix.animals.monster.master.mashup",
+    "rent_url": "https://t.me/kotlincaptain",
+    "features": [
+        "Match 3 геймплей",
+        "Слияние животных",
+        "Красочная графика",
+        "Уровни и задания"
+    ]
 }
