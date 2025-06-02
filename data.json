@@ -1,19 +1,24 @@
 {
-  "tokens": ["alpha123", "beta456", "gamma789"],
-  "apps": [
-    {
-      "id": 1,
-      "name": "Sweet Fate Tasker",
-      "emoji": "🍭",
-      "link": "https://play.google.com/store/apps/details?id=fortune.tasker.sweet.fate",
-      "image": "https://example.com/plnki.jpg"
-    },
-    {
-      "id": 2,
-      "name": "Word Orbs",
-      "emoji": "🔱",
-      "link": "https://play.google.com/store/apps/details?id=educate.word.orbs.play",
-      "image": "https://example.com/crusher.jpg"
-    }
-  ]
+  "tokens": {
+    "abc123": "user1",
+    "def456": "user2"
+  },
+  "apps": {
+    "user1": [
+      {
+        "name": "Sweet Casino",
+        "app_name": "sweet_casino",
+        "url": "https://your-username.github.io/app_dashboard/sweet_casino/kb.json",
+        "mini_app": "https://your-username.github.io/app_dashboard/sweet_casino/"
+      }
+    ],
+    "user2": [
+      {
+        "name": "Crypto Clicker",
+        "app_name": "crypto_clicker",
+        "url": "https://your-username.github.io/app_dashboard/crypto_clicker/kb.json",
+        "mini_app": "https://your-username.github.io/app_dashboard/crypto_clicker/"
+      }
+    ]
+  }
 }
