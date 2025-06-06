@@ -1,6 +1,7 @@
 import json
 from aiogram import Bot, Dispatcher, executor, types
 from bot.config import BOT_TOKEN
+from utils.app_manager import AppManager
 import os
 from utils.logger import logger, log_errors
 import sys
@@ -26,6 +27,8 @@ if not os.path.isdir(APPS_DIR):
     logger.error(f"Папка с приложениями не найдена: {APPS_DIR}")
     print(f"FATAL: Папка с приложениями не найдена: {APPS_DIR}", file=sys.stderr)
     sys.exit(3)
+
+app_manager = AppManager(APPS_DIR)
 
 # Загружаем токены из site/tokens.json
 
@@ -137,8 +140,13 @@ async def apps(message: types.Message):
 async def go_back(call: types.CallbackQuery):
     telegram_id = str(call.from_user.id)
     keyboard = types.InlineKeyboardMarkup()
-    for app in apps:
-        keyboard.add(types.InlineKeyboardButton(f"{app['emoji']} {app['name']}", callback_data=f"app_{app['id']}"))
+    for app_id, app in app_manager.apps.items():
+        name = app.get('name', 'Без названия')
+        emoji = app.get('emoji', '')
+        button_text = f"{emoji} {name}".strip()
+        keyboard.add(
+            types.InlineKeyboardButton(button_text, callback_data=f"app_{app_id}")
+        )
     await call.message.answer("Список приложений:", reply_markup=keyboard)
 
 if __name__ == "__main__":
